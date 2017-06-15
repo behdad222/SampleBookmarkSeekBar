@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,13 +19,11 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FrameLayout flBookMarkList;
-    private TextView tvSelectedPage;
-    private TextView tv;
     private EditText etTotalPage;
     private EditText etInput;
     private Button btSetTotalPage;
     private Button btAdd;
-    private Button btRemove;
+    private Button btShow;
     private int listWidth;
     private int bookMarkItemWidth;
 
@@ -48,13 +45,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initٰViews() {
         flBookMarkList = (FrameLayout) findViewById(R.id.flBookMarkList);
-        tvSelectedPage = (TextView) findViewById(R.id.tvSelectedPage);
-        tv = (TextView) findViewById(R.id.tv);
         etTotalPage = (EditText) findViewById(R.id.etTotalPage);
         etInput = (EditText) findViewById(R.id.etInput);
         btSetTotalPage = (Button) findViewById(R.id.btSetTotalPage);
         btAdd = (Button) findViewById(R.id.btAdd);
-        btRemove = (Button) findViewById(R.id.btRemove);
+        btShow = (Button) findViewById(R.id.btShow);
 
         flBookMarkList.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -70,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setListeners() {
         btSetTotalPage.setOnClickListener(this);
         btAdd.setOnClickListener(this);
-        btRemove.setOnClickListener(this);
+        btShow.setOnClickListener(this);
     }
 
     @Override
@@ -85,8 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 addBookMark();
                 break;
 
-            case R.id.btRemove:
-//                printBookMArk();
+            case R.id.btShow:
                 makeList();
                 break;
         }
@@ -121,17 +115,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bookMarkList.addAll(hashSet);
 
         Collections.sort(bookMarkList);
-    }
-
-    private void printBookMArk() {
-        sortList();
-
-        String list = "";
-        for (int i = 0; i < bookMarkList.size(); i++) {
-            list = list + bookMarkList.get(i) + "-";
-        }
-        tv.setText(list);
-
     }
 
     private void makeList() {
